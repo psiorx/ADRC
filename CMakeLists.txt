@@ -7,4 +7,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_C_COMPILER   arm-none-linux-gnueabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-linux-gnueabi-g++)
 
-add_executable(balance src/main.cpp)
+set(CMAKE_CXX_FLAGS "-static")
+
+add_executable(balance src/main.cpp src/gyroscope.cpp)

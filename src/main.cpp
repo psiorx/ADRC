@@ -1,9 +1,17 @@
-#include <fcntl.h>
-#include <stdio.h>
-#include <sys/mman.h>
-#include "lms2012.h"
+#include "gyroscope.h"
+#include <iostream>
 
-int main()
-{
+using namespace std;
+
+int main() {
+  
+  Gyroscope gyro(1);
+
+  float bias = gyro.calibrate(500);
+
+  for(int i = 0; i < 50000; i++) {
+    cout << (gyro.read() - bias) << endl;
+  }
+
   return 0;
 }
