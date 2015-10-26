@@ -4,19 +4,19 @@
 #include "Kalman.h"
 
 using namespace std;
-using namespace Eigen;
 
 int main()
 {
   Gyroscope gyro(1);
   Accelerometer accel(2);
   
-  cout << gyro.Calibrate(500) << endl;
-  Kalman kalman_filter;
+  float bias_prior = gyro.Calibrate(500);
+  
+  Kalman kalman_filter(90.0f, bias_prior, 1/819.0f);
 
-  for(int x = 0; x< 50000; x++) {
-    float pitch_accel = Accelerometer::ComputePitchFast(accel.Read()) * 180 / M_PI;
-  	float pitch = kalman_filter.getAngle(pitch_accel, gyro.Read(), 0.01f);
+  for(int x = 0; x< 100000; x++) {
+    float accel_pitch = Accelerometer::ComputePitchFast(accel.Read()) * 180 / M_PI;
+  	float pitch = kalman_filter.getAngle(accel_pitch, gyro.Read());
   	cout << pitch << endl;
   }
 
