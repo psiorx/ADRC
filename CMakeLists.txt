@@ -10,6 +10,7 @@ set(CMAKE_CXX_FLAGS "-std=c++0x -static -O3")
 
 find_package(Eigen3 REQUIRED)
 
+include_directories(KalmanFilter)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
-add_executable(balance src/main.cpp src/gyroscope.cpp src/accelerometer.cpp)
+add_executable(balance src/main.cpp src/gyroscope.cpp src/accelerometer.cpp KalmanFilter/Kalman.cpp)

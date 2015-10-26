@@ -1,0 +1,3 @@
+[submodule "KalmanFilter"]
+	path = KalmanFilter
+	url = https://github.com/TKJElectronics/KalmanFilter.git
