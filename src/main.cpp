@@ -1,6 +1,6 @@
 #include <iostream>
-#include "gyroscope.h"
-#include "accelerometer.h"
+#include "Gyroscope.h"
+#include "Accelerometer.h"
 #include "Kalman.h"
 
 using namespace std;

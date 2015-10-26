@@ -1,4 +1,4 @@
-#include "gyroscope.h"
+#include "Gyroscope.h"
 #include <fcntl.h>
 #include <iostream>
 #include <unistd.h>

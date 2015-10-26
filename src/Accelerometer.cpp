@@ -1,4 +1,4 @@
-#include "accelerometer.h"
+#include "Accelerometer.h"
 #include <fcntl.h>
 #include <iostream>
 #include <unistd.h>
