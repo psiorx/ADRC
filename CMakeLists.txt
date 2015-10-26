@@ -6,6 +6,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_CXX_COMPILER arm-none-linux-gnueabi-g++)
 
-set(CMAKE_CXX_FLAGS "-static")
+set(CMAKE_CXX_FLAGS "-std=c++0x -static -O3")
 
-add_executable(balance src/main.cpp src/gyroscope.cpp)
+find_package(Eigen3 REQUIRED)
+
+include_directories(${EIGEN3_INCLUDE_DIR})
+
+add_executable(balance src/main.cpp src/gyroscope.cpp src/accelerometer.cpp)

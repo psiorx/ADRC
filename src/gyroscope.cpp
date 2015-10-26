@@ -38,12 +38,12 @@ Gyroscope::~Gyroscope() {
   }
 }
 
-float Gyroscope::read() {
+float Gyroscope::Read() {
   DATA16 raw = m_p_device->Pin1[m_port][m_p_device->Actual[m_port]];
   return ((float) raw) / 10.0f;
 }
 
-float Gyroscope::calibrate(const unsigned int samples) {
+float Gyroscope::Calibrate(const unsigned int samples) {
   if(samples == 0) {
     cout << "Error: calibration requires at least one sample." << endl;
     return 0.0f;
@@ -52,7 +52,7 @@ float Gyroscope::calibrate(const unsigned int samples) {
   float sum = 0.0f;
   
   for(int i = 0; i < samples; i++) {
-    sum += read();
+    sum += Read();
   }
   
   return sum / samples;

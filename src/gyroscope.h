@@ -10,8 +10,9 @@ class Gyroscope {
 public:
   Gyroscope(const unsigned int port);
   ~Gyroscope();
-  float read();
-  float calibrate(const unsigned int samples);
+  float Read();
+  //returns gyro bias
+  float Calibrate(const unsigned int samples);
 };
 
 #endif
