@@ -7,12 +7,12 @@
 using namespace std;
 
 Gyroscope::Gyroscope(const unsigned int port) {
-  if(port > 4) {
-    cout << "Error: gyroscope port must be an integer in the range [0, 4]" << endl;
+  if(port ==0 || port > 4) {
+    cout << "Error: gyroscope port must be an integer in the range [1, 4]" << endl;
     return;
   }
 
-  m_port = (char) (port - 1);
+  m_port = port - 1;
 
   m_file = open(ANALOG_DEVICE_NAME, O_RDWR | O_SYNC);
 

@@ -15,7 +15,7 @@ Accelerometer::Accelerometer(const unsigned int port) {
     return;
   }
 
-  m_port = (char) (port - 1);
+  m_port = port - 1;
 
   m_file = open(IIC_DEVICE_NAME, O_RDWR | O_SYNC);
 
