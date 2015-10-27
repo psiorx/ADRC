@@ -19,5 +19,6 @@ add_executable(balance
   src/Accelerometer.cpp 
   src/Motor.cpp 
   src/Encoders.cpp
+  src/TWIP.cpp
   KalmanFilter/Kalman.cpp
 )
