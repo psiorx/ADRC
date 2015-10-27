@@ -2,6 +2,7 @@
 #include "Gyroscope.h"
 #include "Accelerometer.h"
 #include "Kalman.h"
+#include "Motor.h"
 
 using namespace std;
 
@@ -9,7 +10,16 @@ int main()
 {
   Gyroscope gyro(1);
   Accelerometer accel(2);
+	
+  Motor motor(PORT_A | PORT_D);
+  motor.Start();
+  motor.SetPower(30);
+  sleep(1);
+  motor.SetPower(-30);
+  sleep(1);
+  motor.Stop();
   
+
   float bias_prior = gyro.Calibrate(500);
   
   Kalman kalman_filter(90.0f, bias_prior, 0.01);
