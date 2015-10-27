@@ -3,6 +3,7 @@
 #include "Accelerometer.h"
 #include "Kalman.h"
 #include "Motor.h"
+#include "Encoders.h"
 
 using namespace std;
 
@@ -17,8 +18,12 @@ int main()
   sleep(1);
   motor.SetPower(-30);
   sleep(1);
-  motor.Stop();
+  motor.SetPower(0);
   
+  Encoders encoders;
+  for(int x=0;x<10000;x++) {
+  	cout << encoders.ReadCount(0) << endl;
+  }
 
   float bias_prior = gyro.Calibrate(500);
   

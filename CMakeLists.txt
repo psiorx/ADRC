@@ -13,4 +13,11 @@ find_package(Eigen3 REQUIRED)
 include_directories(KalmanFilter)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
-add_executable(balance src/main.cpp src/Gyroscope.cpp src/Accelerometer.cpp src/Motor.cpp KalmanFilter/Kalman.cpp)
+add_executable(balance 
+  src/main.cpp 
+  src/Gyroscope.cpp 
+  src/Accelerometer.cpp 
+  src/Motor.cpp 
+  src/Encoders.cpp
+  KalmanFilter/Kalman.cpp
+)
