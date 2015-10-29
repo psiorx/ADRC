@@ -5,8 +5,10 @@ using namespace Eigen;
 TWIP::TWIP(const unsigned int gyro_port, 
      const unsigned int accel_port,
      const unsigned int motor_left, 
-     const unsigned int motor_right)
-     : m_gyroscope(gyro_port),
+     const unsigned int motor_right,
+     float dt)
+     : m_kalman_filter(90.0f, 243.0f, dt),
+       m_gyroscope(gyro_port),
        m_accelerometer(accel_port),
        m_motors((1 << (motor_left-1)) | (1 << (motor_right - 1)) ) {
 
@@ -15,15 +17,20 @@ TWIP::TWIP(const unsigned int gyro_port,
   m_motors.Start();
 }
 
-VectorXf TWIP::output(VectorXf const & u) {
-  VectorXf y(5);
+Vector2f TWIP::output(float u) {
+  Vector2f y;
   
-  m_motors.SetPower(floor(u[0]));
+  m_motors.SetPower(floor(u));
   
-  y << m_accelerometer.Read(),
-       m_gyroscope.Read(),
-       (m_encoders.ReadCount(m_motor_ports[0]) 
+  float accel_pitch = Accelerometer::ComputePitchFast(m_accelerometer.Read()) * 180.0f / M_PI;
+  
+  float fused_pitch = m_kalman_filter.getAngle(accel_pitch, m_gyroscope.Read());
+  
+  float wheel_position = (m_encoders.ReadCount(m_motor_ports[0]) 
         + m_encoders.ReadCount(m_motor_ports[1]))*0.5f;
-  
+
+  y << fused_pitch,
+       wheel_position;
+
   return y; 
 }

@@ -6,7 +6,7 @@
 
 class Accelerometer {
   int m_file;
-  char m_port;
+  unsigned int m_port;
   IIC *m_p_device;
   IICDAT m_iic_dat;
 

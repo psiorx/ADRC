@@ -25,10 +25,8 @@ Accelerometer::Accelerometer(const unsigned int port) {
   }
 
   m_p_device = (IIC*)mmap(0, sizeof(IIC), 
-    PROT_READ | 
-    PROT_WRITE, 
-    MAP_FILE | 
-    MAP_SHARED, m_file, 0);
+    PROT_READ | PROT_WRITE, 
+    MAP_FILE | MAP_SHARED, m_file, 0);
 
   if(m_p_device == MAP_FAILED) {
     cout << "Error: failed to map the i2c device." << endl;

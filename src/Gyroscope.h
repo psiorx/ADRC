@@ -5,7 +5,7 @@
 
 class Gyroscope {
   int m_file;
-  char m_port;
+  unsigned int m_port;
   ANALOG *m_p_device;
 public:
   Gyroscope(const unsigned int port);

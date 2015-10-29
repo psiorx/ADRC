@@ -1,9 +1,6 @@
 #include <iostream>
 #include "ADRC.h"
-#include "ESO.h"
-#include "Kalman.h"
 #include "TWIP.h"
-#include "CascadePlant.h"
 
 #define GYRO_PORT 1
 #define ACCEL_PORT 2
@@ -15,21 +12,23 @@ using namespace Eigen;
 
 int main()
 {
-  TWIP robot(GYRO_PORT, ACCEL_PORT, MOTOR_LEFT, MOTOR_RIGHT);
+  const float dt = 0.01f;
 
-  Kalman kalman_filter(90, 243, 0.01);
+  const float wo_inner = 150.0f;
+  const float wc_inner = 15.0f;
+  const float b_inner = 100.0f;
+
+  TWIP robot(GYRO_PORT, ACCEL_PORT, MOTOR_LEFT, MOTOR_RIGHT, dt);
+  
   VectorXf y(5);
-  VectorXf u(1);
-  u << 0.0f;
+  float u = 0.0f;
 
-  for(int x = 0; x< 50000; x++) {
+  ADRC inner_loop(wo_inner, wc_inner, b_inner, dt);
+
+  while(true) {
   	y = robot.output(u);
-    float accel_pitch = Accelerometer::ComputePitchFast(y.head<3>()) * 180 / M_PI;
-  	float pitch = kalman_filter.getAngle(accel_pitch, y[3]);
-  	cout << pitch << endl;
+  	u = inner_loop.Update(u, y[0], 0.0f);
   }
-
-  ESO eso(5, 100, 0.01);
 
   return 0;
 }

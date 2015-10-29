@@ -22,10 +22,8 @@ Gyroscope::Gyroscope(const unsigned int port) {
   }
 
   m_p_device = (ANALOG*)mmap(0, sizeof(ANALOG), 
-    PROT_READ | 
-    PROT_WRITE, 
-    MAP_FILE | 
-    MAP_SHARED, m_file, 0);
+    PROT_READ | PROT_WRITE, 
+    MAP_FILE | MAP_SHARED, m_file, 0);
 
   if(m_p_device == MAP_FAILED) {
     cout << "Error: failed to map the analog device." << endl;
@@ -51,7 +49,7 @@ float Gyroscope::Calibrate(const unsigned int samples) {
 
   float sum = 0.0f;
   
-  for(int i = 0; i < samples; i++) {
+  for(unsigned int i = 0; i < samples; i++) {
     sum += Read();
   }
   
