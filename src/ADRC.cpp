@@ -2,8 +2,8 @@
 
 using namespace Eigen;
 
-ADRC::ADRC(float wo, float wc, float b, float dt) 
-: m_observer(wo, b, dt) {
+ADRC::ADRC(float wo, float wc, float b0, float dt) 
+: m_observer(wo, b0, dt), m_b(b0) {
 	m_kp = wc * wc;
 	m_kd = wc + wc;
 }

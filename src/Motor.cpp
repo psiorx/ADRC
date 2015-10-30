@@ -25,30 +25,25 @@ Motor::~Motor() {
 
 void Motor::Start() {
   m_motor_command[0] = opOUTPUT_START;
-  if(write(m_file, m_motor_command, 2) != 2) {
-    cout << "Error starting motors." << endl;
-  }  
+  WriteCommand(2);
 }
 
 void Motor::Stop() {
   m_motor_command[0] = opOUTPUT_STOP;
-  if(write(m_file, m_motor_command, 2) != 2) {
-    cout << "Error stopping motors." << endl;
-  }  
+  WriteCommand(2);
 }
 
+void Motor::Reset() {
+  m_motor_command[0] = opOUTPUT_RESET;
+  WriteCommand(2);
+}
+
+void Motor::WriteCommand(const unsigned int bytes) {
+  write(m_file, m_motor_command, bytes);
+}
 
 void Motor::SetPower(int power) {
-  if(power > 100) {
-    power = 100;
-  } else if (power < -100) {
-    power = -100;
-  }
-
   m_motor_command[0] = opOUTPUT_POWER; 
   m_motor_command[2] = static_cast<char>(power);
-  
-  if(write(m_file, m_motor_command,3) != 3) {
-    cout << "Error setting motor power." << endl;
-  }
+  WriteCommand(3);
 }

@@ -13,7 +13,7 @@ class ESO {
 	void Discretize(Eigen::Matrix3f const & A_obs_ct, 
 	Eigen::Matrix<float, 3, 2> const & B_obs_ct, float dt);
 public:
-	ESO(float wo, float b, float dt);
+	ESO(float wo, float b0, float dt);
 	virtual ~ESO() { };
 	void SetState(Eigen::Vector3f const & xhat);
 	void SetParameters(float wo, float b, float dt);

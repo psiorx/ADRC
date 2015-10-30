@@ -10,12 +10,13 @@
 // TWIP: Two Wheeled Inverted Pendulum
 
 class TWIP {
+	Gyroscope m_gyroscope;
 	Kalman m_kalman_filter;
-  Gyroscope m_gyroscope;
-	Accelerometer m_accelerometer;
+  Accelerometer m_accelerometer;
 	Motor m_motors;
 	Encoders m_encoders;
-  unsigned int m_motor_ports[2];
+  int m_motor_ports[2];
+  int m_encoder_offset[2];
 
 public:
   

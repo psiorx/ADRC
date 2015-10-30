@@ -9,8 +9,8 @@ class Encoders {
 public:
   Encoders();
   ~Encoders();
-  int ReadCount(const unsigned int port);
-  int ReadSpeed(const unsigned int port);
+  int ReadCount(const unsigned int port) const;
+  int ReadSpeed(const unsigned int port) const;
 };
 
 #endif

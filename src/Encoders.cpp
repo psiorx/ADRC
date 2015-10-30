@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 Encoders::Encoders() {
 
   m_file = open(MOTOR_DEVICE_NAME, O_RDWR | O_SYNC);
@@ -32,11 +30,10 @@ Encoders::~Encoders() {
   }
 }
 
-int Encoders::ReadCount(const unsigned int port) {
+int Encoders::ReadCount(const unsigned int port) const {
   return m_p_device[port].TachoSensor;
 }
 
-int Encoders::ReadSpeed(const unsigned int port) {
+int Encoders::ReadSpeed(const unsigned int port) const {
   return m_p_device[port].Speed;
 }
-

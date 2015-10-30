@@ -12,7 +12,7 @@ class ADRC {
 
 	float Controller(Eigen::Vector3f const & xhat, float y_desired);
 public:
-	ADRC(float wo, float wc, float b, float dt);
+	ADRC(float wo, float wc, float b0, float dt);
 	virtual ~ADRC() { };
 	float Update(float u, float y, float y_desired);
 };

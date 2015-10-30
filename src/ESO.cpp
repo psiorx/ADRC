@@ -3,11 +3,11 @@
 
 using namespace Eigen;
 
-ESO::ESO(float wo, float b, float dt) {
-	SetParameters(wo, b, dt);
+ESO::ESO(float wo, float b0, float dt) {
+	SetParameters(wo, b0, dt);
 }
 
-void ESO::SetParameters(float wo, float b, float dt) {
+void ESO::SetParameters(float wo, float b0, float dt) {
 	Matrix3f A;
 	Vector3f B;
 	Vector3f L;
@@ -19,7 +19,7 @@ void ESO::SetParameters(float wo, float b, float dt) {
 	     0, 0, 1, 
 	     0, 0, 0;
 	
-	B << 0, b, 0;
+	B << 0, b0, 0;
 	
 	C << 1, 0, 0;
 	
