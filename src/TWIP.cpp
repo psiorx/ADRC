@@ -23,6 +23,7 @@ TWIP::TWIP(const unsigned int gyro_port,
 }
 
 Vector2f TWIP::output(float u) {
+
   Vector2f y;
 
   m_motors.SetPower(u);
@@ -34,8 +35,7 @@ Vector2f TWIP::output(float u) {
   int encoder_left = m_encoders.ReadCount(m_motor_ports[0]) - m_encoder_offset[0];  
   int encoder_right = m_encoders.ReadCount(m_motor_ports[1]) - m_encoder_offset[1];
 
-
-  float wheel_position = encoder_left;
+  float wheel_position = (encoder_left + encoder_right) * 0.5f;
 
   y << fused_pitch,
        wheel_position;
